@@ -3,24 +3,96 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --primary-dark: #080c23;
+  --primary-light: #1d223e;
+  --hero-blue: #94a6ff;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary-dark: var(--primary-dark);
+  --color-primary-light: var(--primary-light);
+  --color-hero-blue: var(--hero-blue);
+
+  /* --font-poppins: Poppins, sans-serif; */
+}
+
+.rotated-square {
+  will-change: backdrop-filter; 
+  width: calc(100vh / 1.4142);
+  height: calc(100vh / 1.4142);
+  transform: rotate(45deg) scaleX(2) scaleY(2) skew(5deg,5deg)  translateZ(0);
+  position: absolute;
+  margin-bottom: 100dvh;
+  border-color: #94A6FF10;
+  background-image: linear-gradient(
+    134deg,
+    transparent 0%,
+    transparent 60%,
+    #799FFF02 65%,
+    #799FFF08 72%,
+    #799FFF35 80%,
+    #799FFF80 85%,
+    #94A6FF 100%
+  );
+}
+
+@layer utilities {
+  @keyframes twinkle {
+    0%,
+    100% {
+      opacity: 0.3;
+      transform: translateX(0px);
+    }
+    50% {
+      opacity: 1;
+      transform: translateX(var(--move-x));
+    }
+  }
+
+  /* ⭐️ Temel yıldız animasyonu */
+  .animate-star {
+    animation: twinkle 4s ease-in-out infinite;
+  }
+  /* ⚡️ Daha hızlı yıldızlar */
+  .animate-star-fast {
+    animation: twinkle 2s ease-in-out infinite;
+  }
+  /* 🐢 Daha yavaş yıldızlar */
+  .animate-star-slow {
+    animation: twinkle 6s ease-in-out infinite;
+  }
+  /* 🌈 Renkli yıldızlar */
+  .star-color-white {
+    fill: white;
+  }
+
+  .star-color-blue {
+    fill: #87ceeb; /* sky blue */
+  }
+
+  .star-color-yellow {
+    fill: #ffff99;
+  }
+
+  .star-color-pink {
+    fill: #ffc0cb;
+  }
+  /* 📱 Mobilde animasyon kapalı */
+  @media (max-width: 640px) {
+    .animate-star,
+    .animate-star-fast,
+    .animate-star-slow {
+      animation: none;
+      opacity: 0.5;
+    }
+  }
 }
