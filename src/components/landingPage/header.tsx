@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 import clsx from "clsx";
 import { motion } from "framer-motion";
 import { Menu } from "lucide-react";
+import Logo from "../logo";
 
 const navItems = [
   {
@@ -79,18 +80,8 @@ export default function Header() {
           <div className="lg:hidden flex ">
             <Menu size={24} />
           </div>
-          <div className="xl:w-[150px] w-[130px]">
-            <Image
-              src="/logo.svg"
-              height={40}
-              width={150}
-              alt={"Taskflow Dashboard Screen"}
-              className="object-cover object-top rounded-xl z-10"
-              unoptimized
-              quality={100}
-
-              
-            />
+          <div className="xl:w-[150px] w-[130px] h-[50px] relative">
+            <Logo/>
           </div>
         </div>
         <Navbar />
