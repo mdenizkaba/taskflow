@@ -1,0 +1,32 @@
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: translateX(0px);
+  }
+  50% {
+    opacity: 1;
+    transform: translateX(var(--move-x));
+  }
+}
+/* ⭐️ Temel yıldız animasyonu */
+.animate-star {
+  animation: twinkle 4s ease-in-out infinite;
+}
+/* ⚡️ Daha hızlı yıldızlar */
+.animate-star-fast {
+  animation: twinkle 2s ease-in-out infinite;
+}
+/* 🐢 Daha yavaş yıldızlar */
+.animate-star-slow {
+  animation: twinkle 6s ease-in-out infinite;
+}
+/* 📱 Mobilde animasyon kapalı */
+@media (max-width: 640px) {
+  .animate-star,
+  .animate-star-fast,
+  .animate-star-slow {
+    animation: none;
+    opacity: 0.5;
+  }
+}

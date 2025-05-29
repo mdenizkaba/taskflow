@@ -1,12 +1,14 @@
 "use client";
+import "./hero.css";
 import Image from "next/image";
 import Container from "../container";
 import HeroBackground from "./heroBackground";
 import clsx from "clsx";
 import InfoIcon from "@/components/icons/InfoIcon";
 import { motion } from "framer-motion";
-import RandomStars from "../randomStars";
+
 import SpecialButton from "../special-button";
+import RandomStars from "../random-stars.tsx";
 
 export default function Hero() {
   return (

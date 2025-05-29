@@ -1,9 +1,7 @@
 'use client'
-
+import "./styles.css";
 import React, { useEffect, useState } from "react";
-
 const SPEEDS = ["animate-star-slow", "animate-star", "animate-star-fast"];
-
 const getRandom = (min: number, max: number) => Math.random() * (max - min) + min;
 
 interface RandomStarsProps {
