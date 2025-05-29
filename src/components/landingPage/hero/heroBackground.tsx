@@ -87,7 +87,7 @@ const HeroBackground = () => {
         zIndex={5}
         delay={0.9}
       />
-      <HeroTriangle borderWidth={3} scale={0.1} zIndex={6} delay={1} />
+      <HeroTriangle disableShadow borderWidth={3} scale={0.1} zIndex={6} delay={1} />
     </div>
   );
 };

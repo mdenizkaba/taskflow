@@ -32,7 +32,7 @@ export default function Hero() {
           <div className="absolute inset-0 h-[30px] w-[120px] rounded-full -z-10 bg-[#799FFF] top-[2px] opacity-50" />
           <div className="absolute inset-0 h-[30px] w-[120px] rounded-full -z-10 bg-[#799FFF] top-[4px] opacity-20" />
           <div className="absolute inset-0 h-[60px] -translate-x-1/4 w-[240px] rounded-full -z-10 bg-[#8fadf7] -top-[6px] opacity-20 blur-xl" />
-          <div className="absolute inset-0 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-[50px] w-[300px] rounded-full -z-10 opacity-20">
+          <div className="absolute inset-0 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-[50px] w-[300px] rounded-full -z-10 opacity-30">
             <RandomStars count={60} width={300} height={30} />
           </div>
         </motion.div>

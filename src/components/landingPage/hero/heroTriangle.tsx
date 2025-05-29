@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import { motion } from "framer-motion";
+import clsx from "clsx";
 type HeroTriangleProps = {
   borderWidth?: number;
   children?: ReactNode;
@@ -7,6 +8,7 @@ type HeroTriangleProps = {
   effect?: number;
   zIndex?: number;
   delay?: number;
+  disableShadow?:boolean;
 };
 export default function HeroTriangle({
   borderWidth = 0.5,
@@ -15,6 +17,7 @@ export default function HeroTriangle({
   effect,
   zIndex = 0,
   delay = 1,
+  disableShadow=false,
 }: HeroTriangleProps) {
   return (
     <>
@@ -42,10 +45,12 @@ export default function HeroTriangle({
             delay: 2.5,
             duration: 0.5,
           }}
-          className="rotated-square relative"
+          className={clsx(
+            "relative",
+            disableShadow?"rotated-square-middle":"rotated-square"
+          )}
           style={{
-            // backdropFilter: children ? "blur(2px)" : "blur(0px)",
-            boxShadow: "0 0 30px rgba(0,0,0,.2)",
+            boxShadow:disableShadow ? "0 0 0px rgba(0,0,0,0)": "0 0 30px rgba(0,0,0,.2)",
             borderWidth: borderWidth * 2,
           }}
         >

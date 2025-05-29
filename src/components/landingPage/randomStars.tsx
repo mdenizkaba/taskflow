@@ -1,16 +1,18 @@
-"use client"
+'use client'
+
 import React, { useEffect, useState } from "react";
 
-const COLORS = ["star-color-white"];
 const SPEEDS = ["animate-star-slow", "animate-star", "animate-star-fast"];
 
 const getRandom = (min: number, max: number) => Math.random() * (max - min) + min;
 
-const RandomStars = ({ count = 50, width = 400, height = 30 }: {
+interface RandomStarsProps {
   count?: number;
   width?: number;
   height?: number;
-}) => {
+}
+
+const RandomStars: React.FC<RandomStarsProps> = ({ count = 50, width = 400, height = 30 }) => {
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
@@ -31,20 +33,19 @@ const RandomStars = ({ count = 50, width = 400, height = 30 }: {
     const top = getRandom(0, height);
     const size = getRandom(0.5, 1) * 2;
     const moveX = `${getRandom(-3, 3)}px`;
-    const color = COLORS[Math.floor(Math.random() * COLORS.length)];
     const speed = SPEEDS[Math.floor(Math.random() * SPEEDS.length)];
 
     return (
       <div
         key={i}
-        className={`absolute rounded-full ${speed} ${color}`}
+        className={`absolute rounded-full ${speed} bg-white`}
         style={{
           left: `${left}px`,
           top: `${top}px`,
           width: `${size}px`,
           height: `${size}px`,
           transform: `translateX(var(--move-x))`,
-          "--move-x": moveX
+          "--move-x": moveX,
         } as React.CSSProperties}
       />
     );
