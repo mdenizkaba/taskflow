@@ -1,5 +1,4 @@
 "use client";
-import Image from "next/image";
 import Container from "./container";
 import SpecialButton from "./special-button";
 import Link from "next/link";
