@@ -6,8 +6,6 @@ export default function TimeIcon({ className }: TimeIconProps) {
   return (
     <svg
       className={className}
-      width="40"
-      height="40"
       viewBox="0 0 48 48"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

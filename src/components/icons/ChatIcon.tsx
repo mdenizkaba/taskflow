@@ -6,8 +6,6 @@ export default function ChatIcon({ className }: ChatIconProps) {
   return (
     <svg
       className={className}
-      width="30" 
-      height="30"
       viewBox="0 0 34 32"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

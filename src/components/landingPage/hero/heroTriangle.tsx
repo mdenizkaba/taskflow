@@ -29,24 +29,14 @@ export default function HeroTriangle({
           duration: 1,
           ease: "easeOut", // Daha doğal bir hareket için
         }}
-        className="absolute inset-0 flex justify-center items-center h-dvh w-full transition-all duration-500"
+        className="absolute inset-0 flex justify-center items-center h-dvh w-full transition-all duration-500 "
         style={{
           zIndex: zIndex,
         }}
       >
-        <motion.div
-          initial={{ backdropFilter: "blur(0px)" }}
-          animate={
-            children
-              ? { backdropFilter: "blur(2.5px)" }
-              : { backdropFilter: "blur(0px)" }
-          }
-          transition={{
-            delay: 2.5,
-            duration: 0.5,
-          }}
+        <div
           className={clsx(
-            "relative",
+            "relative backdrop-blur-[3px]",
             disableShadow?"rotated-square-middle":"rotated-square"
           )}
           style={{
@@ -77,7 +67,7 @@ export default function HeroTriangle({
               }}
             className="absolute left-10  h-[2px] bg-gradient-to-r from-transparent via-white to-transparent  w-26 bottom-0"></motion.div>
           )}
-        </motion.div>
+        </div>
       </motion.div>
       <div
         className="absolute inset-0 "

@@ -1,8 +1,11 @@
-export default function BoltIcon() {
+interface BoltIconProps {
+  className?: string;
+}
+
+export default function BoltIcon({className}:BoltIconProps) {
   return (
     <svg
-      width="20"
-      height="36"
+      className={className}
       viewBox="0 0 20 43"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

@@ -17,9 +17,9 @@ const Container = ({
       className={`
         w-full mx-auto px-2
         sm:max-w-screen-sm
-        md:max-w-screen-md
-        lg:max-w-screen-lg
-        xl:max-w-screen-xl
+        md:max-w-[500px]
+        lg:max-w-[650px]
+        xl:max-w-[1000px]
         2xl:max-w-[1200px]
         ${className}
       `}
