@@ -86,6 +86,7 @@ export default function Header() {
               width={150}
               alt={"Taskflow Dashboard Screen"}
               className="object-cover object-top rounded-xl z-10"
+              unoptimized
             />
           </div>
         </div>
