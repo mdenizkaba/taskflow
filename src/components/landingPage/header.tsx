@@ -82,11 +82,14 @@ export default function Header() {
           <div className="xl:w-[150px] w-[130px]">
             <Image
               src="/logo.svg"
-              height={50}
-              width={200}
+              height={40}
+              width={150}
               alt={"Taskflow Dashboard Screen"}
               className="object-cover object-top rounded-xl z-10"
               unoptimized
+              quality={100}
+
+              
             />
           </div>
         </div>
