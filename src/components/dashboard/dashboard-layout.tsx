@@ -6,9 +6,8 @@ function DashboardBody({ children }: { children?: ReactNode }) {
     <div className="flex flex-1 pt-2">
       <div className="flex flex-1 bg-linear-to-tl from-[#222641] from-80%  to-[#7E83A9] rounded-tl-2xl p-[1px]">
         <div className="flex-1 rounded-tl-2xl bg-linear-to-tl from-[#090B17] to-[#161825] px-8 py-6 text-white">
-      {children}
+          {children}
         </div>
-  
       </div>
     </div>
   );

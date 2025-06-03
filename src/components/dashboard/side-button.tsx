@@ -34,6 +34,7 @@ type SideButtonProps = {
   icon: React.ReactNode;
   badge?: number;
   active?: boolean;
+  href:string
 };
 
 export default function SideButton({
@@ -41,19 +42,20 @@ export default function SideButton({
   icon,
   badge = 0,
   active = false,
+  href
 }: SideButtonProps) {
   return (
     <Link
-      href={"/dashboard"}
+      href={href}
       className={clsx(
-        "flex w-full h-[40px]  p-0.5 rounded-lg",
+        "flex w-full h-[36px] p-[1px] rounded-lg bg-linear-to-tl from-transparent from-20% via-transparent to-transparent",
         active &&
           "bg-linear-to-tl from-[#242C56] from-20% via-[#242C56] to-[#7C92FF]"
       )}
     >
       <div
         className={clsx(
-          "relative w-full h-full items-center px-[14px] rounded-lg flex text-[#969CB7] hover:text-white transition-colors duration-200",
+          "relative w-full h-full items-center px-[12px] rounded-lg flex text-[#969CB7] hover:text-white transition-colors duration-200",
           active &&
             "bg-linear-to-r from-[#2A3364] from-10% via-[#1C2346] via-20% to-[#13172E] text-white"
         )}
