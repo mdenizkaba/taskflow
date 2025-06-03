@@ -85,7 +85,7 @@ export default function Header() {
         </div>
         <Navbar />
         <div className="w-[150px] xl:flex lg:hidden flex justify-end">
-          <SpecialButton light>Sign In</SpecialButton>
+          <SpecialButton light href="/dashboard">Sign In</SpecialButton>
         </div>
       </Container>
     </header>
