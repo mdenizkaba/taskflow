@@ -68,7 +68,7 @@ const tabsList = [
 export default function DashboardTab() {
   const segment = useNextSegmentAfter('my-tasks');
   return (
-    <ul className="flex border-b border-[#252C52] pb-2 pt-4 mb-6">
+    <ul className="flex border-b border-[#252C52] pb-2 pt-4 mb-4">
       {tabsList.map((item, index) => {
         return (
           <DashboardButton

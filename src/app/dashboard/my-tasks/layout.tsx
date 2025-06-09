@@ -14,7 +14,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="w-full">
+    <div className="">
       <SmallTitle label="Tasks" />
       <div className="text-[24px] font-bold text-white mt-6">My Tasks</div>
       <DashboardTab/>

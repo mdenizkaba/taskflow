@@ -3,7 +3,7 @@ import VerticalDots from "@/components/icons/VerticalDots";
 
 const RowHeader = ({ label, badge }: { label: string; badge: number }) => {
   return (
-    <div className="px-4 flex justify-between items-center">
+    <div className="px-4 py-1 flex justify-between items-center sticky top-0 z-10">
       <div className="flex gap-2 justify-center">
         <div className="text-white font-medium text-base">{label}</div>
         {badge > 0 && (
@@ -35,7 +35,7 @@ const Row = ({
 }) => {
   // Todo: genişlik buluğu alanın genişliğine ulaşıp ordan hesaplanmalı ve min-w ile sabitlenmeli
   return (
-    <div className="min-w-[315px] w-[calc(((((100vw)-280px)-3rem)-(4.5rem+18px))/4)]">
+    <div className="min-w-[315px] w-[calc(((((100vw)-280px)-3rem)-(4.5rem+18px))/4)] ">
       <RowHeader label={label} badge={badge} />
       <div className="rounded-2xl bg-[#12131B] mt-3 p-3 gap-3 flex flex-col">{children}</div>
     </div>
@@ -44,7 +44,7 @@ const Row = ({
 
 export default function MyTasks() {
   return (
-    <div className="flex gap-6 w-[calc(((((100vw)-280px)-3rem)-(18px)))] overflow-x-scroll pb-4">
+    <div className="flex gap-6 w-[calc(((((100vw)-280px)-3rem)-(18px)))] h-[calc(100dvh-200px)] overflow-scroll pb-4">
       <Row label="Backlog" badge={5}>
         <div className="w-full h-[150px] bg-slate-400 rounded-xl">
           asasas
