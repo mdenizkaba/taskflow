@@ -1,11 +1,11 @@
 import clsx from "clsx";
 import CirclePlusIcon from "../icons/CirclePlusIcon";
 import VerticalDots from "../icons/VerticalDots";
-
+// Row bileşeni
 const RowHeader = ({ label, badge }: { label: string; badge: number }) => {
   return (
     <div className="px-4 h-12 flex justify-between items-center sticky top-0 z-10 backdrop-blur-xs">
-      <div className="flex gap-2 justify-center">
+      <div className="flex gap-2 justify-center items-center">
         <div className="text-white font-medium text-base">{label}</div>
         {badge > 0 && (
           <div className="flex justify-center items-center rounded-lg bg-[#5B72EF]/15 px-2 text-xs">
@@ -25,24 +25,28 @@ const RowHeader = ({ label, badge }: { label: string; badge: number }) => {
   );
 };
 
-export default function Row ({
+export default function Row({
   children,
   className = "",
   label,
   badge = 0,
+  dragHandleProps,
 }: {
   children: React.ReactNode;
   label: string;
   className?: string;
   badge?: number;
+  dragHandleProps?: React.HTMLAttributes<HTMLDivElement> | undefined;
 }) {
-  // Todo: genişlik buluğu alanın genişliğine ulaşıp ordan hesaplanmalı ve min-w ile sabitlenmeli
+
   return (
     <div className={clsx(
-      "min-w-[315px] w-[calc(((((100vw)-280px)-3rem)-(4.5rem+18px))/4)] ",
+      "min-w-[315px] w-[calc(((((100vw)-280px)-3rem)-(4.5rem+18px))/4)] mr-6",
       className
     )}>
-      <RowHeader label={label} badge={badge} />
+      <div {...dragHandleProps} className="cursor-move">
+        <RowHeader label={label} badge={badge} />
+      </div>
       <div className="rounded-2xl bg-[#12131B] mt-3 p-3 gap-3 flex flex-col">
         {children}
       </div>

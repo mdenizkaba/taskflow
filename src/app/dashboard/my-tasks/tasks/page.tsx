@@ -1,8 +1,11 @@
+"use client";
+
+import { DragDropContext, Droppable, Draggable, DropResult } from "@hello-pangea/dnd";
 import TaskCard from "@/components/task/task-card";
 import Row from "@/components/task/task-row";
-import { FC } from "react";
+import { FC, useState } from "react";
 
-type Task = {
+export type Task = {
   date: string;
   priority: "High" | "Medium" | "Low" | null;
   title: string;
@@ -10,10 +13,12 @@ type Task = {
   tags: string[];
   attachments: number;
   comments: number;
-  status: "Backlog" | "Today" | "In Progress" | "Completed";
+  status: Status;
 };
 
-const tasks: Task[] = [
+export type Status = "Backlog" | "Today" | "In Progress" | "Completed" ;
+
+const initialTasks: Task[] = [
   {
     date: "11.06.2024",
     priority: "High",
@@ -24,6 +29,16 @@ const tasks: Task[] = [
     comments: 2,
     status: "Backlog",
   },
+  // {
+  //   date: "11.06.2024",
+  //   priority: "High",
+  //   title: "Complete UI Mockups for Dashboard",
+  //   avatars: ["/dashboard/avatar-1.jpg"],
+  //   tags: ["Design"],
+  //   attachments: 0,
+  //   comments: 2,
+  //   status: "Deneme",
+  // },
   {
     date: "14.06.2024",
     priority: "Low",
@@ -157,33 +172,113 @@ const tasks: Task[] = [
 ];
 
 const MyTasks: FC = () => {
-  const statusMap = tasks.reduce<Record<string, Task[]>>((acc, task) => {
-    if (!acc[task.status]) {
-      acc[task.status] = [];
+  const [statusOrder, setStatusOrder] = useState<Status[]>(["Backlog", "Today", "In Progress", "Completed"]);
+  const [columns, setColumns] = useState(() => {
+    const statusMap: Record<Status, Task[]> = {
+      Backlog: [],
+      Today: [],
+      "In Progress": [],
+      Completed: [],
+    };
+    for (const task of initialTasks) {
+      statusMap[task.status].push(task);
     }
-    acc[task.status].push(task);
-    return acc;
-  }, {});
+    return statusMap;
+  });
+
+  const handleDragEnd = (result: DropResult) => {
+    const { source, destination, type } = result;
+    if (!destination) return;
+
+    // Sütun sıralaması değişikliği
+    if (type === "COLUMN") {
+      const newStatusOrder = [...statusOrder];
+      const [removed] = newStatusOrder.splice(source.index, 1);
+      newStatusOrder.splice(destination.index, 0, removed);
+      setStatusOrder(newStatusOrder);
+      return;
+    }
+
+    // Kart sıralaması değişikliği
+    const sourceCol = source.droppableId as Status;
+    const destCol = destination.droppableId as Status;
+
+    const sourceTasks = Array.from(columns[sourceCol]);
+    const destTasks = Array.from(columns[destCol]);
+
+    const [movedTask] = sourceTasks.splice(source.index, 1);
+
+    if (sourceCol === destCol) {
+      sourceTasks.splice(destination.index, 0, movedTask);
+      setColumns((prev) => ({ ...prev, [sourceCol]: sourceTasks }));
+    } else {
+      movedTask.status = destCol;
+      destTasks.splice(destination.index, 0, movedTask);
+      setColumns((prev) => ({ ...prev, [sourceCol]: sourceTasks, [destCol]: destTasks }));
+    }
+  };
 
   return (
-    <div className="flex gap-6 w-[calc(((((100vw)-280px)-3rem)-(18px)))] h-[calc(100dvh-200px)] overflow-scroll pb-4">
-      {Object.entries(statusMap).map(([status, tasks]) => (
-        <Row key={status} label={status} badge={tasks.length} className={status==="Completed"?"opacity-50":""}>
-          {tasks.map((task, index) => (
-            <TaskCard
-              key={index}
-              date={task.date}
-              priority={task.priority}
-              title={task.title}
-              avatars={task.avatars}
-              tags={task.tags}
-              attachments={task.attachments}
-              comments={task.comments}
-            />
-          ))}
-        </Row>
-      ))}
-    </div>
+    <DragDropContext onDragEnd={handleDragEnd}>
+      <Droppable droppableId="board" direction="horizontal" type="COLUMN">
+        {(provided) => (
+          <div
+            ref={provided.innerRef}
+            {...provided.droppableProps}
+            className="flex w-[calc(((((100vw)-280px)-3rem)-(18px)))] h-[calc(100dvh-200px)] overflow-scroll pb-4"
+          >
+            {statusOrder.map((status, index) => (
+              <Draggable key={status} draggableId={status} index={index}>
+                {(provided) => (
+                  <div
+                    ref={provided.innerRef}
+                    {...provided.draggableProps}
+                    className="flex flex-col min-w-[300px]"
+                  >
+                    <Row
+                      label={status}
+                      badge={columns[status].length}
+                      className={status === "Completed" ? "opacity-50" : ""}
+                      {...(provided.dragHandleProps ? { dragHandleProps: provided.dragHandleProps } : {})}
+                    >
+                      <Droppable droppableId={status} type="CARD">
+                        {(provided) => (
+                          <div
+                            ref={provided.innerRef}
+                            {...provided.droppableProps}
+                            className="space-y-2 min-h-[60px]"
+                          >
+                            {columns[status].map((task, index) => (
+                              <Draggable
+                                key={`${status}-${index}`}
+                                draggableId={`${status}-${index}`}
+                                index={index}
+                              >
+                                {(provided) => (
+                                  <div
+                                    ref={provided.innerRef}
+                                    {...provided.draggableProps}
+                                    {...provided.dragHandleProps}
+                                  >
+                                    <TaskCard {...task} />
+                                  </div>
+                                )}
+                              </Draggable>
+                            ))}
+                            {provided.placeholder}
+                          </div>
+                        )}
+                      </Droppable>
+                    </Row>
+                  </div>
+                )}
+              </Draggable>
+            ))}
+            {provided.placeholder}
+          </div>
+        )}
+      </Droppable>
+    </DragDropContext>
   );
 };
 
